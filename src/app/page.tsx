@@ -168,7 +168,7 @@ const QuestionForm = () => {
     }
   }, [cookies.sessionId, setCookie]);
 
-  const sendAnswerToServer = async (questionId, answer) => {
+  const sendAnswerToServer = async (questionId: string, answer: string) => {
     const sessionId = cookies.sessionId;
     if (!sessionId) {
       console.error("Session ID não encontrado.");
