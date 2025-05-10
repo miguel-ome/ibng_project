@@ -168,7 +168,7 @@ const QuestionForm = () => {
     }
   }, [cookies.sessionId, setCookie]);
 
-  const sendAnswerToServer = async (questionId: string, answer: string) => {
+  const sendAnswerToServer = async (questionId: number, answer: string) => {
     const sessionId = cookies.sessionId;
     if (!sessionId) {
       console.error("Session ID não encontrado.");
@@ -257,7 +257,7 @@ const QuestionForm = () => {
               Pergunta {currentQuestion.id}: {currentQuestion.text}
             </h2>
             {currentQuestion.type === "radio" &&
-              currentQuestion.options.map((option) => (
+              currentQuestion.options?.map((option) => (
                 <div key={option} className="flex items-center py-2">
                   <input
                     type="radio"
@@ -279,7 +279,7 @@ const QuestionForm = () => {
                 </div>
               ))}
             {currentQuestion.type === "checkbox" &&
-              currentQuestion.options.map((option) => (
+              currentQuestion.options?.map((option) => (
                 <div key={option} className="flex items-center py-2">
                   <input
                     type="checkbox"
@@ -306,7 +306,7 @@ const QuestionForm = () => {
                 name={`question-${currentQuestion.id}`}
                 value={answers[`question-${currentQuestion.id}`] || ""}
                 onChange={handleAnswerChange}
-                rows="4"
+                rows={4}
                 className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-800"
               />
             )}

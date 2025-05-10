@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function POST() {
   try {
     // Excluir todos os registros da tabela FormularioSessao
-    const deleteResult = await prisma.formularioSessao.deleteMany();
+    await prisma.formularioSessao.deleteMany();
 
     // console.log("Registros excluídos:", deleteResult.count); // O .count não existe no deleteMany do prisma
 

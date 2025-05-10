@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -90,7 +91,6 @@ const ResultadosPage = () => {
             {
               label: `Pergunta ${questionId}`,
               data: graficoDataSets,
-              backgroundColor: "rgba(54, 162, 235, 0.6)",
             },
           ],
         };
