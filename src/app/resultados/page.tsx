@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -12,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { Answer, ISessions } from "@/interfaces/ISessions";
 
 ChartJS.register(
   CategoryScale,
@@ -23,13 +23,13 @@ ChartJS.register(
 );
 
 // Função para processar as respostas e preparar os dados para o gráfico (mantemos esta função)
-function processarRespostas(sessoes: any[]) {
+function processarRespostas(sessoes: Answer[]) {
   const contagemRespostas: {
     [questionId: string]: { [answer: string]: number };
   } = {};
 
   sessoes.forEach((sessao) => {
-    sessao.respostas.forEach((resposta: any) => {
+    sessao.respostas.forEach((resposta: ISessions) => {
       const questionId = resposta.questionId;
       const answerValue = resposta.answer;
 
@@ -71,7 +71,8 @@ const ResultadosPage = () => {
       if (!response.ok) {
         throw new Error(`Erro ao buscar os resultados: ${response.status}`);
       }
-      const data = await response.json();
+      const data = (await response.json()) as unknown as Answer[];
+      console.log(data);
       const respostasProcessadas = processarRespostas(data);
       const graficoData: {
         [questionId: string]: {
@@ -98,7 +99,7 @@ const ResultadosPage = () => {
 
       setDadosGrafico(graficoData);
       setLoading(false);
-    } catch (err: any) {
+    } catch (err) {
       setError("Erro ao carregar os resultados.");
       setLoading(false);
       console.error(err);
@@ -121,7 +122,7 @@ const ResultadosPage = () => {
         }
         // Atualiza os gráficos após a exclusão
         await carregarResultados();
-      } catch (err: any) {
+      } catch (err) {
         setError("Erro ao excluir as respostas.");
         console.error(err);
       }
