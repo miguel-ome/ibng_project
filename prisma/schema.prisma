@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  url       = "postgresql://postgres.zdvaqssgnbtzyfnmcpje:DevProgram1.@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+  directUrl = "postgresql://postgres.zdvaqssgnbtzyfnmcpje:DevProgram1.@aws-0-sa-east-1.pooler.supabase.com:5432/postgres"
 }
 
 model FormularioSessao {
